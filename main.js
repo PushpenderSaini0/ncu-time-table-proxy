@@ -1,8 +1,8 @@
-const API = "http://192.168.0.100:8080/log.json";
+const API = "https://notes.pushpendersaini.com/timetableproxy/";
 
 const getData = async () => {
-    const res = await fetch(API);
-    const json = res.json();
+    const res = await fetch(API + "data.json");
+    const json = await res.json();
     return json;
 }
 
