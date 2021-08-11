@@ -73,11 +73,16 @@ const init = async () => {
         if (err) console.log(err);
         console.log("Successfully Written to File.");
     })
-
-    fs.writeFile("./public/date.json", JSON.stringify({ date: Date() }), (err) => {
+    const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' })
+    fs.writeFile("./public/timestamp.json", JSON.stringify({ timestamp }), (err) => {
         if (err) console.log(err);
         console.log("Time Stamp added");
     })
 }
 
-init();
+const runForever = () => {
+    init();
+    setTimeout(runForever, 15 * 60 * 1000);
+}
+
+runForever();
