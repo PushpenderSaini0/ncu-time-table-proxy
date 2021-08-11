@@ -6,6 +6,12 @@ const getData = async () => {
     return json;
 }
 
+const addTimestamp = async () => {
+    const res = await fetch(API + "timestamp.json");
+    const json = await res.json();
+    document.querySelector("#timestamp").innerHTML = `Cache updated at : ${json.timestamp}`;
+}
+
 const plotTimeTable = (data) => {
     data.forEach(el => {
         const name = el.name;
@@ -32,3 +38,4 @@ const plotTimeTable = (data) => {
 }
 
 getData().then(plotTimeTable);
+addTimestamp();
