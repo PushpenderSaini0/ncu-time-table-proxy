@@ -6,6 +6,7 @@ require('dotenv').config()
 const { JSDOM } = jsdom;
 
 const USER = {
+    uriKey: process.env.URIKEY,
     username: process.env.USERNAME,
     password: process.env.PASSWORD,
 };
@@ -17,11 +18,11 @@ const getCookie = (headers) => {
             last = keys.pop();
         keys.reduce((r, a) => r[a] = r[a] || {}, obj)[last] = value;
     });;
-    return obj['set-cookie'].split(';')[0] + " ; " + obj['set-cookie'].split(';')[9].split(',')[1];
+    return obj['set-cookie'].split(';')[0] + " ; " + obj['set-cookie'].split(';')[5].split(',')[1] + " ; " + obj['set-cookie'].split(';')[8].split(',')[1];
 }
 
 const getList = async () => {
-    const res = await fetch("https://www.ncuindia.edu/admin_1lhvzdz/", {
+    const res = await fetch(`https://www.ncuindia.edu/${USER.uriKey}/`, {
         "credentials": "include",
         "headers": {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0",
@@ -30,8 +31,8 @@ const getList = async () => {
             "Content-Type": "application/x-www-form-urlencoded",
             "Upgrade-Insecure-Requests": "1"
         },
-        "referrer": "https://www.ncuindia.edu/admin_1lhvzdz/",
-        "body": "log=" + USER.username + "&pwd=" + USER.password + "&wp-submit=Log+In&redirect_to=https%3A%2F%2Fwww.ncuindia.edu%2Fwp-admin%2F&testcookie=1",
+        "referrer": `https://www.ncuindia.edu/${USER.uriKey}/`,
+        "body": "log=+" + USER.username + "&pwd=" + USER.password + "&wp-submit=Log+In&redirect_to=https%3A%2F%2Fwww.ncuindia.edu%2Fwp-admin%2F&testcookie=1",
         "method": "POST",
     })
     let dom = null;
