@@ -16,7 +16,7 @@ const plotTimeTable = (data) => {
     data.forEach(el => {
         const name = el.name;
         const links = el.links;
-        let s = `<h1 class="pb-2 border-bottom"># ${name}</h1>`;
+        let s = `<h1 id="${name}" class="pb-2 border-bottom"># ${name}</h1>`;
         links.forEach(el => {
             s += `
             <div class="row py-3 row-cols-1 row-cols-lg-1">
