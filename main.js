@@ -1,15 +1,10 @@
-const API = "https://notes.pushpendersaini.com/timetableproxy/";
+const API = "https://d3qwmocld6bg1y.cloudfront.net/";
 
 const getData = async () => {
-    const res = await fetch(API + "data.json");
+    const res = await fetch(API + "data");
     const json = await res.json();
-    return json;
-}
-
-const addTimestamp = async () => {
-    const res = await fetch(API + "timestamp.json");
-    const json = await res.json();
-    document.querySelector("#timestamp").innerHTML = `Cache updated at : ${json.timestamp}`;
+    document.querySelector("#timestamp").innerHTML = `Cache updated at : ${json.timestamp} <br /> Updates every 15 minute`;
+    return json.data;
 }
 
 const plotTimeTable = (data) => {
@@ -38,4 +33,3 @@ const plotTimeTable = (data) => {
 }
 
 getData().then(plotTimeTable);
-addTimestamp();
