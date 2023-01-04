@@ -82,9 +82,7 @@ const getList = async () => {
 };
 
 const init = async () => {
-    console.log("HI")
     const liveData = await getList();
-    console.log("BYE")
     const timestamp = new Date().toLocaleString("en-GB", {
         timeZone: "Asia/Kolkata",
     });
